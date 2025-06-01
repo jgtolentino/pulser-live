@@ -4,6 +4,7 @@
   "outputDirectory": "server/dist/public",
   "ignoreCommand": "git diff --quiet HEAD^ HEAD",
   "routes": [
+    { "src": "/assets/(.*)", "dest": "/assets/$1" },
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/index.html" }
   ]
