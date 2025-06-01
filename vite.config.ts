@@ -3,15 +3,14 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-var vite_config_default = defineConfig({
-  plugins: async () => {
-    const base = [react(), runtimeErrorOverlay()];
-    if (process.env.NODE_ENV !== "production" && process.env.REPL_ID) {
-      const { cartographer } = await import("@replit/vite-plugin-cartographer");
-      base.push(cartographer());
-    }
-    return base;
-  },
+export default defineConfig({
+  plugins: [
+    react(),
+    runtimeErrorOverlay(),
+    ...(process.env.NODE_ENV !== "production" && process.env.REPL_ID
+      ? [import("@replit/vite-plugin-cartographer").then(m => m.cartographer())]
+      : [])
+  ],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -25,5 +24,3 @@ var vite_config_default = defineConfig({
     emptyOutDir: true,
   },
 });
-
-export default vite_config_default;
