@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "pnpm install --frozen-lockfile && pnpm build",
+  "buildCommand": "npm ci --ignore-scripts && npm run build",
   "outputDirectory": "server/dist/public",
   "ignoreCommand": "git diff --quiet HEAD^ HEAD",
   "routes": [
