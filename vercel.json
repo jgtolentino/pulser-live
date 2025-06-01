@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm ci && npm run build",
+  "buildCommand": "npm ci --ignore-scripts && npm run build",
   "outputDirectory": "server/dist/public",
   "ignoreCommand": "git diff --quiet HEAD^ HEAD",
   "routes": [
