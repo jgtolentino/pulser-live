@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm ci --ignore-scripts && npm run build",
+  "buildCommand": "pnpm install && pnpm build",
   "outputDirectory": "server/dist/public",
   "ignoreCommand": "git diff --quiet HEAD^ HEAD",
   "routes": [
