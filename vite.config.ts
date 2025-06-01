@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
-export default defineConfig({
+var vite_config_default = defineConfig({
   plugins: async () => {
     const base = [react(), runtimeErrorOverlay()];
     if (process.env.NODE_ENV !== "production" && process.env.REPL_ID) {
@@ -25,3 +25,5 @@ export default defineConfig({
     emptyOutDir: true,
   },
 });
+
+export default vite_config_default;
