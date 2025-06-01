@@ -1,0 +1,81 @@
+Absolutely! If you want to recreate something like [https://tbwalondon.com/disruption/](https://tbwalondon.com/disruption/) — a modern, visually rich, animated, and responsive landing site — here are some top GitHub repositories and templates you can use as a strong starting point:
+
+---
+
+## 🚀 **Best Open-Source Templates/Repos for Creative Agency Landing Pages**
+
+### 1. **Creative Portfolio / Agency Templates**
+- **[timlrx/tailwind-nextjs-starter-blog](https://github.com/timlrx/tailwind-nextjs-starter-blog)**
+  - Built with Next.js and Tailwind CSS, easily adapted for creative or agency sites.
+  - Modern, fast, SEO-optimized, and easy to customize with animations.
+
+- **[bchiang7/v4](https://github.com/bchiang7/v4)**
+  - Portfolio site with beautiful transitions, scroll animations, and modern layout.
+  - Built with Next.js, Framer Motion (for animations), and styled-components.
+
+- **[smakosh/gatsby-portfolio-dev](https://github.com/smakosh/gatsby-portfolio-dev)**
+  - Gatsby/React, minimal and animated, ideal for landing pages with creative flair.
+
+---
+
+### 2. **Landing Page Boilerplates**
+- **[ixartz/Next-js-Landing-Page-Starter-Template](https://github.com/ixartz/Next-js-Landing-Page-Starter-Template)**
+  - Next.js, Tailwind CSS, ready-to-deploy, highly customizable with sections for agency/creative work.
+
+- **[cruip/open-react-template](https://github.com/cruip/open-react-template)**
+  - Open source React landing page with bold visuals, parallax, and call-to-action sections.
+
+---
+
+### 3. **Animation & Visual Effects**
+- **[framer/motion](https://github.com/framer/motion)**
+  - Use with React for stunning scroll-based and reveal animations, much like TBWA’s site.
+  - Not a template, but combine it with any above for rich micro-interactions.
+
+---
+
+### 4. **Design-First: Ready-Made HTML/CSS**
+- **[startbootstrap-agency](https://github.com/StartBootstrap/startbootstrap-agency)**
+  - Classic agency-style single-page with smooth scroll and section reveals (pure HTML/CSS/JS, easy to convert to React/Next.js).
+
+---
+
+## 🛠️ **How to Use These for Your Project**
+
+1. **Pick a stack**: For TBWA-style, Next.js + Tailwind CSS + Framer Motion is ideal for performance and animation.
+2. **Clone one of the above repos** (e.g., timlrx/tailwind-nextjs-starter-blog or ixartz/Next-js-Landing-Page-Starter-Template).
+3. **Customize sections**:  
+   - Hero with bold slogan (“Disruption”)
+   - Animated/scroll-based transitions (Framer Motion)
+   - Creative use of images, overlays, and grid layouts
+   - Contact/CTA and about sections
+4. **Deploy**: Use Vercel, Netlify, or Azure Static Web Apps for instant preview and launch.
+
+---
+
+## 🔗 **Quick-Start Example**
+
+```bash
+# Clone and start the Next.js Landing Page template
+git clone https://github.com/ixartz/Next-js-Landing-Page-Starter-Template.git disruption-landing
+cd disruption-landing
+npm install
+npm run dev
+# Then start customizing!
+```
+
+---
+
+## 📦 **Summary Table**
+
+| Repo/Template | Stack | Animations | Customizable | Link |
+|---------------|-------|------------|--------------|------|
+| timlrx/tailwind-nextjs-starter-blog | Next.js, Tailwind | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | [GitHub](https://github.com/timlrx/tailwind-nextjs-starter-blog) |
+| bchiang7/v4 | Next.js, Framer Motion | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | [GitHub](https://github.com/bchiang7/v4) |
+| ixartz/Next-js-Landing-Page-Starter-Template | Next.js, Tailwind | ⭐⭐⭐ | ⭐⭐⭐⭐ | [GitHub](https://github.com/ixartz/Next-js-Landing-Page-Starter-Template) |
+| smakosh/gatsby-portfolio-dev | Gatsby, React | ⭐⭐⭐ | ⭐⭐⭐ | [GitHub](https://github.com/smakosh/gatsby-portfolio-dev) |
+| startbootstrap-agency | HTML/CSS/JS | ⭐⭐ | ⭐⭐⭐ | [GitHub](https://github.com/StartBootstrap/startbootstrap-agency) |
+
+---
+
+**Want a step-by-step guide to customize one for your agency/brand? Let me know your stack preference (React/Next.js, Gatsby, or plain HTML), and I’ll outline the exact steps and code snippets to get you started!**
