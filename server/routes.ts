@@ -11,7 +11,7 @@ export async function registerRoutes(app: import("express").Express): Promise<Se
   // ─── Example JSON endpoint ──────────────────────────────────────────────
   const api = Router();
   api.get("/api/health", (_req: Request, res: Response) =>
-    res.json({ ok: true, env: process.env.NODE_ENV || "development" })
+    res.json({ ok: true, commit: process.env.VERCEL_GIT_COMMIT_SHA || "local" })
   );
   app.use(api);
 

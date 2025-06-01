@@ -1,6 +1,7 @@
 import express from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { logger } from "./logger";
 
 const app = express();
 app.use(express.json());
@@ -29,7 +30,7 @@ app.use((req, res, next) => {
         logLine = logLine.slice(0, 79) + "…";
       }
 
-      log(logLine);
+      logger.info(logLine);
     }
   });
 
@@ -65,6 +66,6 @@ app.use((req, res, next) => {
     host: "0.0.0.0",
     reusePort: true,
   }, () => {
-    log(`serving on port ${port}`);
+    logger.info(`serving on port ${port}`);
   });
 })();
