@@ -1,0 +1,137 @@
+{
+  "mcp_integration": {
+    "existing_sqlite_server": {
+      "path": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/dist/index.js",
+      "db_path": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite",
+      "config_path": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/config/server-config-local.json",
+      "description": "Leverage existing SQLite MCP server for JamPacked data storage"
+    },
+    
+    "jampacked_tables": {
+      "creative_analysis": {
+        "table_name": "jampacked_creative_analysis",
+        "schema": {
+          "id": "TEXT PRIMARY KEY",
+          "campaign_id": "TEXT NOT NULL",
+          "campaign_name": "TEXT",
+          "analysis_type": "TEXT NOT NULL",
+          "creative_effectiveness_score": "REAL",
+          "attention_score": "REAL",
+          "emotion_score": "REAL",
+          "brand_recall_score": "REAL",
+          "cultural_alignment_score": "REAL",
+          "multimodal_score": "REAL",
+          "analysis_results": "TEXT",
+          "recommendations": "TEXT",
+          "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+          "updated_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+        }
+      },
+      
+      "pattern_discoveries": {
+        "table_name": "jampacked_pattern_discoveries",
+        "schema": {
+          "id": "TEXT PRIMARY KEY",
+          "campaign_id": "TEXT",
+          "pattern_type": "TEXT NOT NULL",
+          "pattern_description": "TEXT",
+          "novelty_score": "REAL",
+          "confidence_score": "REAL",
+          "business_impact": "REAL",
+          "pattern_data": "TEXT",
+          "discovered_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+        }
+      },
+      
+      "cultural_insights": {
+        "table_name": "jampacked_cultural_insights",
+        "schema": {
+          "id": "TEXT PRIMARY KEY",
+          "campaign_id": "TEXT NOT NULL",
+          "culture": "TEXT NOT NULL",
+          "effectiveness_score": "REAL",
+          "appropriateness_score": "REAL",
+          "adaptation_recommendations": "TEXT",
+          "risk_assessment": "TEXT",
+          "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+        }
+      },
+      
+      "optimization_recommendations": {
+        "table_name": "jampacked_optimizations",
+        "schema": {
+          "id": "TEXT PRIMARY KEY",
+          "campaign_id": "TEXT NOT NULL",
+          "optimization_type": "TEXT",
+          "description": "TEXT",
+          "predicted_impact": "REAL",
+          "implementation_effort": "TEXT",
+          "priority_score": "REAL",
+          "ab_test_plan": "TEXT",
+          "status": "TEXT DEFAULT 'proposed'",
+          "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+        }
+      },
+      
+      "campaign_sessions": {
+        "table_name": "jampacked_sessions",
+        "schema": {
+          "session_id": "TEXT PRIMARY KEY",
+          "campaign_id": "TEXT",
+          "session_type": "TEXT",
+          "interface": "TEXT",
+          "metadata": "TEXT",
+          "artifacts": "TEXT",
+          "created_at": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
+          "last_accessed": "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+        }
+      }
+    },
+    
+    "mcp_tools": {
+      "jampacked_analyze": {
+        "description": "Analyze creative campaign using JamPacked intelligence",
+        "sql_template": "INSERT INTO jampacked_creative_analysis (id, campaign_id, campaign_name, analysis_type, creative_effectiveness_score, analysis_results, recommendations) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        "returns": "analysis_id"
+      },
+      
+      "jampacked_get_analysis": {
+        "description": "Retrieve JamPacked analysis results",
+        "sql_template": "SELECT * FROM jampacked_creative_analysis WHERE campaign_id = ? ORDER BY created_at DESC",
+        "returns": "analysis_results"
+      },
+      
+      "jampacked_discover_patterns": {
+        "description": "Get discovered patterns for campaign",
+        "sql_template": "SELECT * FROM jampacked_pattern_discoveries WHERE campaign_id = ? ORDER BY novelty_score DESC",
+        "returns": "patterns"
+      },
+      
+      "jampacked_cultural_insights": {
+        "description": "Get cultural effectiveness insights",
+        "sql_template": "SELECT * FROM jampacked_cultural_insights WHERE campaign_id = ? AND culture = ?",
+        "returns": "cultural_analysis"
+      },
+      
+      "jampacked_get_optimizations": {
+        "description": "Get optimization recommendations",
+        "sql_template": "SELECT * FROM jampacked_optimizations WHERE campaign_id = ? ORDER BY priority_score DESC",
+        "returns": "optimizations"
+      },
+      
+      "jampacked_track_session": {
+        "description": "Track analysis session across Claude interfaces",
+        "sql_template": "INSERT OR REPLACE INTO jampacked_sessions (session_id, campaign_id, session_type, interface, metadata, last_accessed) VALUES (?, ?, ?, ?, ?, datetime('now'))",
+        "returns": "session_id"
+      }
+    },
+    
+    "integration_benefits": {
+      "unified_storage": "All JamPacked data stored in existing SQLite database",
+      "claude_accessibility": "Both Claude Desktop and Code can access same data",
+      "no_duplication": "Leverages existing MCP infrastructure",
+      "seamless_queries": "Use SQL queries to analyze JamPacked results",
+      "cross_session_continuity": "Work continues seamlessly between interfaces"
+    }
+  }
+}

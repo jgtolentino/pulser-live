@@ -1,0 +1,398 @@
+version: '3.8'
+
+services:
+  # =====================================================
+  # DATABASES
+  # =====================================================
+  
+  postgres-creative:
+    image: postgres:15-alpine
+    container_name: jampacked-postgres-creative
+    environment:
+      POSTGRES_DB: jampacked_creative
+      POSTGRES_USER: creative_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-creative_secure_pass}
+      POSTGRES_INITDB_ARGS: "-c shared_preload_libraries=pg_stat_statements,pgvector"
+    volumes:
+      - creative_data:/var/lib/postgresql/data
+      - ./volumes/postgres-init:/docker-entrypoint-initdb.d
+      - ../database/schemas:/schemas:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U creative_user -d jampacked_creative"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  postgres-campaigns:
+    image: postgres:15-alpine
+    container_name: jampacked-postgres-campaigns
+    environment:
+      POSTGRES_DB: jampacked_campaigns
+      POSTGRES_USER: campaign_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-campaign_secure_pass}
+      POSTGRES_INITDB_ARGS: "-c shared_preload_libraries=pg_stat_statements,pgvector"
+    volumes:
+      - campaign_data:/var/lib/postgresql/data
+      - ./volumes/postgres-init:/docker-entrypoint-initdb.d
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U campaign_user -d jampacked_campaigns"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  # =====================================================
+  # CACHING & VECTOR STORAGE
+  # =====================================================
+  
+  redis-creative-cache:
+    image: redis:7-alpine
+    container_name: jampacked-redis
+    command: redis-server --appendonly yes --maxmemory 2gb --maxmemory-policy allkeys-lru
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_creative:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  chroma-creative-embeddings:
+    image: chromadb/chroma:latest
+    container_name: jampacked-chroma
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_creative:/chroma/chroma
+    environment:
+      - CHROMA_SERVER_AUTH_PROVIDER=chromadb.auth.token.TokenAuthServerProvider
+      - CHROMA_SERVER_AUTH_CREDENTIALS=${CHROMA_AUTH_TOKEN:-test-token}
+      - PERSIST_DIRECTORY=/chroma/chroma
+      - ANONYMIZED_TELEMETRY=false
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  # =====================================================
+  # OBJECT STORAGE
+  # =====================================================
+  
+  minio-creative-assets:
+    image: minio/minio:latest
+    container_name: jampacked-minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+      MINIO_BROWSER_REDIRECT_URL: http://localhost:9001
+    volumes:
+      - minio_creative:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  createbuckets:
+    image: minio/mc:latest
+    container_name: jampacked-minio-setup
+    depends_on:
+      minio-creative-assets:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc config host add myminio http://minio-creative-assets:9000 minioadmin minioadmin;
+      /usr/bin/mc mb myminio/creative-assets || true;
+      /usr/bin/mc mb myminio/campaign-reports || true;
+      /usr/bin/mc mb myminio/analysis-results || true;
+      /usr/bin/mc policy set public myminio/creative-assets;
+      exit 0;
+      "
+    networks:
+      - jampacked-network
+
+  # =====================================================
+  # SEARCH & ANALYTICS
+  # =====================================================
+  
+  elasticsearch-creative:
+    image: elasticsearch:8.11.0
+    container_name: jampacked-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms2g -Xmx2g"
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elastic_creative:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  kibana:
+    image: kibana:8.11.0
+    container_name: jampacked-kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch-creative:9200
+      - TELEMETRY_ENABLED=false
+    ports:
+      - "5601:5601"
+    depends_on:
+      elasticsearch-creative:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5601/api/status || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  # =====================================================
+  # MCP SERVERS
+  # =====================================================
+  
+  mcp-creative-assets:
+    build:
+      context: ../mcp-servers/creative-assets
+      dockerfile: Dockerfile
+    container_name: jampacked-mcp-creative
+    environment:
+      - NODE_ENV=production
+      - MCP_SERVER_NAME=creative-assets-mcp
+      - POSTGRES_URL=postgresql://creative_user:${DB_PASSWORD:-creative_secure_pass}@postgres-creative:5432/jampacked_creative
+      - REDIS_URL=redis://redis-creative-cache:6379
+      - MINIO_ENDPOINT=minio-creative-assets:9000
+      - MINIO_ACCESS_KEY=${MINIO_ROOT_USER:-minioadmin}
+      - MINIO_SECRET_KEY=${MINIO_ROOT_PASSWORD:-minioadmin}
+    depends_on:
+      postgres-creative:
+        condition: service_healthy
+      redis-creative-cache:
+        condition: service_healthy
+      minio-creative-assets:
+        condition: service_healthy
+    ports:
+      - "3001:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  mcp-campaign-performance:
+    build:
+      context: ../mcp-servers/campaign-performance
+      dockerfile: Dockerfile
+    container_name: jampacked-mcp-campaign
+    environment:
+      - NODE_ENV=production
+      - MCP_SERVER_NAME=campaign-performance-mcp
+      - POSTGRES_URL=postgresql://campaign_user:${DB_PASSWORD:-campaign_secure_pass}@postgres-campaigns:5432/jampacked_campaigns
+      - REDIS_URL=redis://redis-creative-cache:6379
+      - ELASTICSEARCH_URL=http://elasticsearch-creative:9200
+    depends_on:
+      postgres-campaigns:
+        condition: service_healthy
+      redis-creative-cache:
+        condition: service_healthy
+      elasticsearch-creative:
+        condition: service_healthy
+    ports:
+      - "3002:3000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  # =====================================================
+  # API GATEWAY
+  # =====================================================
+  
+  api-gateway:
+    build:
+      context: ../api
+      dockerfile: Dockerfile
+    container_name: jampacked-api
+    environment:
+      - ENVIRONMENT=production
+      - DATABASE_URL=postgresql://creative_user:${DB_PASSWORD:-creative_secure_pass}@postgres-creative:5432/jampacked_creative
+      - CAMPAIGN_DB_URL=postgresql://campaign_user:${DB_PASSWORD:-campaign_secure_pass}@postgres-campaigns:5432/jampacked_campaigns
+      - REDIS_URL=redis://redis-creative-cache:6379
+      - CHROMA_URL=http://chroma-creative-embeddings:8000
+      - ELASTICSEARCH_URL=http://elasticsearch-creative:9200
+      - MINIO_ENDPOINT=minio-creative-assets:9000
+      - MCP_CREATIVE_URL=http://mcp-creative-assets:3000
+      - MCP_CAMPAIGN_URL=http://mcp-campaign-performance:3000
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - JWT_SECRET=${JWT_SECRET:-your-secret-key}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:3000}
+    depends_on:
+      postgres-creative:
+        condition: service_healthy
+      postgres-campaigns:
+        condition: service_healthy
+      redis-creative-cache:
+        condition: service_healthy
+      chroma-creative-embeddings:
+        condition: service_healthy
+      elasticsearch-creative:
+        condition: service_healthy
+      minio-creative-assets:
+        condition: service_healthy
+    ports:
+      - "8080:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  # =====================================================
+  # MONITORING & OBSERVABILITY
+  # =====================================================
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: jampacked-prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./volumes/prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - jampacked-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: jampacked-grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./volumes/grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - jampacked-network
+
+  # =====================================================
+  # DEVELOPMENT TOOLS
+  # =====================================================
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: jampacked-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@jampacked.ai}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    networks:
+      - jampacked-network
+
+  # =====================================================
+  # NGINX REVERSE PROXY
+  # =====================================================
+  
+  nginx:
+    image: nginx:alpine
+    container_name: jampacked-nginx
+    volumes:
+      - ./volumes/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./volumes/nginx/ssl:/etc/nginx/ssl:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - api-gateway
+      - grafana
+      - kibana
+    networks:
+      - jampacked-network
+
+# =====================================================
+# VOLUMES
+# =====================================================
+
+volumes:
+  creative_data:
+    driver: local
+  campaign_data:
+    driver: local
+  redis_creative:
+    driver: local
+  chroma_creative:
+    driver: local
+  minio_creative:
+    driver: local
+  elastic_creative:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+  pgadmin_data:
+    driver: local
+
+# =====================================================
+# NETWORKS
+# =====================================================
+
+networks:
+  jampacked-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16

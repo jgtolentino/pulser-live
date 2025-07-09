@@ -1,0 +1,43 @@
+# Testing dependencies for JamPacked Creative Intelligence
+
+# Core testing frameworks
+unittest2>=1.1.0
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+pytest-cov>=4.0.0
+
+# Coverage reporting
+coverage>=7.0.0
+pytest-html>=3.1.0
+
+# Mocking and fixtures
+mock>=5.0.0
+pytest-mock>=3.10.0
+faker>=18.0.0
+
+# Performance testing
+pytest-benchmark>=4.0.0
+memory-profiler>=0.60.0
+
+# Integration testing
+pytest-timeout>=2.1.0
+pytest-xdist>=3.2.0  # Parallel test execution
+
+# Test data generation
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Async testing support
+asynctest>=0.13.0
+aioresponses>=0.7.4
+
+# Database testing
+pytest-sqlite>=0.2.0
+
+# Code quality
+pytest-flake8>=1.1.1
+pytest-mypy>=0.10.0
+
+# Test reporting
+pytest-json-report>=1.5.0
+allure-pytest>=2.13.0

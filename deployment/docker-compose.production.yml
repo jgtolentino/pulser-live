@@ -1,0 +1,235 @@
+version: '3.9'
+
+services:
+  # JamPacked Core Intelligence Service
+  jampacked-core:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.core
+    image: jampacked/core:latest
+    container_name: jampacked-core
+    environment:
+      - JAMPACKED_ENV=production
+      - WORKSPACE_ROOT=/data/jampacked
+      - MCP_SQLITE_PATH=/data/mcp/database.sqlite
+      - ENABLE_AUTONOMOUS=true
+      - LOG_LEVEL=INFO
+    volumes:
+      - jampacked-workspace:/data/jampacked
+      - mcp-data:/data/mcp
+      - ./config:/app/config:ro
+    ports:
+      - "8080:8080"  # API endpoint
+      - "9090:9090"  # Metrics endpoint
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '2'
+          memory: 4G
+    networks:
+      - jampacked-network
+
+  # Autonomous Pattern Discovery Worker
+  pattern-discovery-worker:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.worker
+    image: jampacked/pattern-worker:latest
+    container_name: pattern-discovery-worker
+    environment:
+      - WORKER_TYPE=pattern_discovery
+      - QUEUE_URL=redis://redis:6379/0
+      - WORKSPACE_ROOT=/data/jampacked
+      - GPU_ENABLED=${GPU_ENABLED:-false}
+    volumes:
+      - jampacked-workspace:/data/jampacked
+      - pattern-memory:/data/patterns
+    depends_on:
+      - redis
+      - jampacked-core
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+    networks:
+      - jampacked-network
+
+  # Cultural Analysis Worker
+  cultural-worker:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.worker
+    image: jampacked/cultural-worker:latest
+    container_name: cultural-worker
+    environment:
+      - WORKER_TYPE=cultural_analysis
+      - QUEUE_URL=redis://redis:6379/1
+      - CULTURAL_DB_PATH=/data/cultural/db.json
+    volumes:
+      - jampacked-workspace:/data/jampacked
+      - cultural-data:/data/cultural
+    depends_on:
+      - redis
+      - jampacked-core
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+    networks:
+      - jampacked-network
+
+  # Multimodal Analysis Worker (GPU-enabled)
+  multimodal-worker:
+    build:
+      context: ..
+      dockerfile: deployment/Dockerfile.gpu
+    image: jampacked/multimodal-worker:latest
+    container_name: multimodal-worker
+    environment:
+      - WORKER_TYPE=multimodal_analysis
+      - QUEUE_URL=redis://redis:6379/2
+      - CUDA_VISIBLE_DEVICES=0
+      - ENABLE_GPU=true
+    volumes:
+      - jampacked-workspace:/data/jampacked
+      - model-cache:/root/.cache
+    depends_on:
+      - redis
+      - jampacked-core
+    deploy:
+      replicas: 1
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - jampacked-network
+
+  # MCP SQLite Integration Service
+  mcp-integration:
+    image: node:18-alpine
+    container_name: mcp-integration
+    working_dir: /app
+    command: node /mcp-sqlite-server/dist/index.js
+    environment:
+      - NODE_ENV=production
+      - SQLITE_DB_PATH=/data/mcp/database.sqlite
+    volumes:
+      - mcp-data:/data/mcp
+      - ${MCP_SERVER_PATH:-/Users/tbwa/Documents/GitHub/mcp-sqlite-server}:/mcp-sqlite-server:ro
+    ports:
+      - "3333:3333"  # MCP server port
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('net').connect(3333)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - jampacked-network
+
+  # Redis for task queue
+  redis:
+    image: redis:7-alpine
+    container_name: jampacked-redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - jampacked-network
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:alpine
+    container_name: jampacked-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+      - nginx-cache:/var/cache/nginx
+    depends_on:
+      - jampacked-core
+    networks:
+      - jampacked-network
+
+  # Prometheus metrics collector
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: jampacked-prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports:
+      - "9091:9090"
+    networks:
+      - jampacked-network
+
+  # Grafana dashboard
+  grafana:
+    image: grafana/grafana:latest
+    container_name: jampacked-grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - grafana-data:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - jampacked-network
+
+volumes:
+  jampacked-workspace:
+    driver: local
+  mcp-data:
+    driver: local
+  pattern-memory:
+    driver: local
+  cultural-data:
+    driver: local
+  model-cache:
+    driver: local
+  redis-data:
+    driver: local
+  nginx-cache:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+networks:
+  jampacked-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

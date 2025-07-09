@@ -1,0 +1,255 @@
+{
+  "creative_mcp_servers": {
+    "creative_assets": {
+      "server_name": "jampacked-creative-assets-mcp",
+      "capabilities": [
+        "multimodal_creative_analysis",
+        "distinctive_asset_recognition",
+        "visual_brand_consistency_check",
+        "memory_encoding_potential_scoring",
+        "attention_prediction_modeling",
+        "cultural_sensitivity_scanning",
+        "creative_fatigue_detection"
+      ],
+      "supported_formats": [
+        "jpg", "png", "mp4", "mov", "webm", "gif",
+        "psd", "ai", "svg", "html5_ads", 
+        "social_media_formats", "ar_filters", "vr_experiences"
+      ],
+      "analysis_features": {
+        "visual_analysis": {
+          "composition_scoring": "Rule of thirds, visual hierarchy, balance",
+          "color_psychology": "Emotional impact and brand consistency",
+          "typography_effectiveness": "Readability and brand voice alignment",
+          "distinctive_elements": "Logo, characters, visual devices recognition"
+        },
+        "video_analysis": {
+          "story_arc_mapping": "Narrative structure and emotional journey",
+          "brand_revelation_timing": "Optimal brand exposure analysis",
+          "attention_retention": "Second-by-second engagement prediction",
+          "platform_optimization": "6s vs 15s vs 30s effectiveness"
+        },
+        "copy_analysis": {
+          "message_clarity": "Key message extraction and simplicity scoring",
+          "emotional_tone": "Sentiment and psychological triggers",
+          "call_to_action": "Urgency and clarity assessment",
+          "cultural_adaptation": "Local market message optimization"
+        }
+      }
+    },
+    
+    "campaign_performance": {
+      "server_name": "jampacked-campaign-mcp",
+      "capabilities": [
+        "real_time_performance_tracking",
+        "cross_platform_attribution",
+        "incrementality_measurement",
+        "brand_lift_integration",
+        "competitive_monitoring",
+        "sentiment_analysis",
+        "share_of_voice_tracking"
+      ],
+      "integrated_platforms": {
+        "paid_media": [
+          "google_ads", "meta_ads", "amazon_advertising",
+          "tiktok_ads", "linkedin_ads", "twitter_ads",
+          "programmatic_dsps", "youtube_ads", "snapchat_ads"
+        ],
+        "owned_media": [
+          "website_analytics", "app_analytics", "email_marketing",
+          "crm_integration", "loyalty_programs"
+        ],
+        "earned_media": [
+          "social_listening", "pr_monitoring", "influencer_tracking",
+          "review_platforms", "news_monitoring"
+        ],
+        "offline_integration": [
+          "tv_attribution", "radio_tracking", "ooh_measurement",
+          "retail_pos_data", "foot_traffic_analytics"
+        ]
+      },
+      "measurement_capabilities": {
+        "real_time_optimization": {
+          "bid_management": "Automated budget allocation",
+          "creative_rotation": "Performance-based creative serving",
+          "audience_optimization": "Segment performance analysis",
+          "dayparting": "Temporal optimization"
+        },
+        "attribution_models": {
+          "last_click": "Basic attribution baseline",
+          "data_driven": "Machine learning attribution",
+          "unified_measurement": "Cross-channel path analysis",
+          "incrementality": "True lift measurement"
+        }
+      }
+    },
+    
+    "creative_intelligence": {
+      "server_name": "jampacked-creative-intel-mcp",
+      "capabilities": [
+        "award_prediction_modeling",
+        "competitor_creative_analysis",
+        "industry_benchmarking",
+        "trend_identification",
+        "inspiration_sourcing",
+        "effectiveness_pattern_recognition",
+        "best_practice_extraction"
+      ],
+      "data_sources": {
+        "award_databases": [
+          "warc_effective_100", "cannes_lions", "effie_awards",
+          "one_show", "d_and_ad", "andy_awards", "webby_awards",
+          "ipa_effectiveness", "marketing_week_masters"
+        ],
+        "industry_intelligence": [
+          "warc_database", "mintel_reports", "euromonitor",
+          "nielsen_insights", "kantar_brandz", "ipsos_studies"
+        ],
+        "trend_sources": [
+          "google_trends", "social_media_trends", "cultural_reports",
+          "generation_studies", "platform_insights"
+        ]
+      },
+      "intelligence_features": {
+        "award_prediction": {
+          "pattern_matching": "Historical winner characteristics",
+          "innovation_scoring": "First-to-market advantage",
+          "jury_preference_modeling": "Judge profile alignment",
+          "submission_optimization": "Case study enhancement"
+        },
+        "competitive_intelligence": {
+          "creative_monitoring": "Real-time competitor tracking",
+          "spend_estimation": "Share of voice analysis",
+          "effectiveness_comparison": "Performance benchmarking",
+          "strategy_inference": "Competitor objective detection"
+        }
+      }
+    },
+    
+    "econometric_modeling": {
+      "server_name": "jampacked-attribution-mcp",
+      "capabilities": [
+        "advanced_media_mix_modeling",
+        "brand_equity_measurement",
+        "price_elasticity_modeling",
+        "competitive_response_analysis",
+        "long_term_effect_isolation",
+        "scenario_planning",
+        "budget_optimization"
+      ],
+      "modeling_features": {
+        "media_mix_modeling": {
+          "components": {
+            "base_demand": "Underlying brand strength",
+            "media_effects": "Channel-specific contributions",
+            "carryover_adstock": "Decay and saturation curves",
+            "competitive_factors": "Share of voice impact",
+            "external_variables": "Seasonality, weather, events"
+          },
+          "advanced_techniques": {
+            "bayesian_modeling": "Uncertainty quantification",
+            "time_varying_effects": "Dynamic parameter estimation",
+            "hierarchical_modeling": "Market and segment variation",
+            "cross_elasticities": "Channel interaction effects"
+          }
+        },
+        "incrementality_framework": {
+          "test_design": {
+            "geo_experiments": "Market-level testing",
+            "synthetic_controls": "Causal inference",
+            "propensity_matching": "Audience comparison",
+            "time_series_analysis": "Intervention impact"
+          },
+          "validation_methods": {
+            "holdout_testing": "Predictive accuracy",
+            "backtesting": "Historical validation",
+            "cross_validation": "Model robustness",
+            "sensitivity_analysis": "Parameter stability"
+          }
+        },
+        "roi_optimization": {
+          "budget_allocation": "Optimal media mix recommendations",
+          "scenario_modeling": "What-if analysis",
+          "efficient_frontier": "Risk-return optimization",
+          "dynamic_optimization": "Real-time budget shifting"
+        }
+      }
+    },
+    
+    "brand_building_measurement": {
+      "server_name": "jampacked-brand-equity-mcp",
+      "capabilities": [
+        "mental_availability_tracking",
+        "physical_availability_analysis",
+        "distinctive_asset_performance",
+        "category_entry_points_mapping",
+        "brand_health_monitoring",
+        "equity_driver_analysis",
+        "memory_structure_research"
+      ],
+      "measurement_frameworks": {
+        "mental_availability": {
+          "metrics": {
+            "brand_salience": "Category buying situation recall",
+            "consideration_set": "Brand preference positioning",
+            "mental_market_share": "Share of mind calculation",
+            "attribute_linkage": "Brand association strength"
+          },
+          "optimization": {
+            "cep_coverage": "Category entry point optimization",
+            "memory_encoding": "Retrieval cue effectiveness",
+            "competitive_positioning": "Differentiation analysis"
+          }
+        },
+        "distinctive_assets": {
+          "asset_audit": {
+            "recognition_testing": "Aided and unaided recognition",
+            "attribution_accuracy": "Correct brand linkage",
+            "uniqueness_scoring": "Competitive differentiation",
+            "usage_consistency": "Cross-touchpoint alignment"
+          },
+          "performance_tracking": {
+            "asset_strength_index": "Recognition x Attribution x Uniqueness",
+            "evolution_monitoring": "Asset strength over time",
+            "portfolio_optimization": "Asset mix effectiveness"
+          }
+        }
+      }
+    },
+    
+    "purpose_impact_measurement": {
+      "server_name": "jampacked-purpose-mcp",
+      "capabilities": [
+        "purpose_authenticity_scoring",
+        "stakeholder_value_measurement",
+        "esg_impact_attribution",
+        "cultural_relevance_assessment",
+        "social_movement_alignment",
+        "behavioral_change_tracking",
+        "reputation_impact_modeling"
+      ],
+      "measurement_features": {
+        "authenticity_framework": {
+          "brand_alignment": "Historical values consistency",
+          "action_credibility": "Proof points and commitments",
+          "stakeholder_perception": "Multi-audience authenticity",
+          "competitive_differentiation": "Purpose uniqueness"
+        },
+        "impact_measurement": {
+          "social_metrics": {
+            "awareness_lift": "Issue awareness increase",
+            "attitude_shift": "Perception change measurement",
+            "behavior_change": "Action taking tracking",
+            "advocacy_creation": "Word of mouth amplification"
+          },
+          "business_connection": {
+            "purpose_premium": "Price elasticity impact",
+            "loyalty_enhancement": "Retention improvement",
+            "talent_attraction": "Employer brand boost",
+            "investor_sentiment": "ESG score improvement"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,286 @@
+agent:
+  name: jampacked-creative-intelligence
+  version: "2.0.0"
+  description: WARC Effective 100 standard AI-powered creative effectiveness platform
+  
+  capabilities:
+    core:
+      - creative_effectiveness_analysis
+      - campaign_performance_optimization
+      - roi_attribution_modeling
+      - cross_platform_integration
+      - real_time_optimization
+    warc_enhanced:
+      - long_term_brand_building_measurement
+      - advanced_econometric_modeling
+      - purpose_driven_effectiveness
+      - global_standardization_frameworks
+      - emerging_technology_assessment
+      - award_prediction_modeling
+  
+  config:
+    llm:
+      provider: anthropic
+      model: claude-3-opus-20240229
+      temperature: 0.7
+      max_tokens: 4096
+      extended_thinking:
+        enabled: true
+        min_thinking_tokens: 3000
+        max_thinking_tokens: 50000
+        thinking_style: warc_gold_standard_rigor
+    
+    system_prompts:
+      primary: /config/prompts/warc_enhanced_creative_expert.json
+      fallback: /config/prompts/creative_expert_system.json
+    
+    memory:
+      type: hybrid
+      components:
+        short_term:
+          provider: redis
+          ttl: 3600
+          max_entries: 1000
+        long_term:
+          provider: postgres
+          retention_days: 365
+          index_type: vector
+        campaign_history:
+          provider: postgres
+          table: campaign_effectiveness_history
+          retention: permanent
+    
+    tools:
+      mcp_servers:
+        - name: creative-assets-mcp
+          config_path: /config/mcp/creative_mcp_servers.json
+          server_key: creative_assets
+          priority: high
+        
+        - name: campaign-performance-mcp
+          config_path: /config/mcp/creative_mcp_servers.json
+          server_key: campaign_performance
+          priority: high
+        
+        - name: creative-intelligence-mcp
+          config_path: /config/mcp/creative_mcp_servers.json
+          server_key: creative_intelligence
+          priority: medium
+        
+        - name: econometric-modeling-mcp
+          config_path: /config/mcp/creative_mcp_servers.json
+          server_key: econometric_modeling
+          priority: high
+        
+        - name: brand-building-mcp
+          config_path: /config/mcp/creative_mcp_servers.json
+          server_key: brand_building_measurement
+          priority: high
+        
+        - name: purpose-impact-mcp
+          config_path: /config/mcp/creative_mcp_servers.json
+          server_key: purpose_impact_measurement
+          priority: medium
+      
+      databases:
+        creative_assets:
+          type: postgres
+          connection_string: ${CREATIVE_DB_URL}
+          pool_size: 20
+        
+        campaigns:
+          type: postgres
+          connection_string: ${CAMPAIGN_DB_URL}
+          pool_size: 20
+        
+        embeddings:
+          type: chroma
+          host: ${CHROMA_HOST}
+          port: 8000
+          collection: creative_intelligence
+        
+        cache:
+          type: redis
+          host: ${REDIS_HOST}
+          port: 6379
+          db: 0
+    
+    analytics:
+      effectiveness_scoring:
+        framework: warc_effective_100
+        dimensions:
+          - strategic_planning_rigor
+          - creative_idea_excellence
+          - business_results_delivery
+          - brand_building_impact
+          - cultural_social_value
+        weights:
+          immediate_impact: 0.3
+          long_term_value: 0.7
+      
+      econometric_models:
+        - media_mix_modeling
+        - incrementality_testing
+        - brand_equity_decomposition
+        - competitive_response
+        - roi_optimization
+      
+      award_prediction:
+        databases:
+          - warc_effective_100
+          - cannes_lions
+          - effie_awards
+          - ipa_effectiveness
+        accuracy_target: 0.9
+    
+    workflows:
+      creative_analysis:
+        steps:
+          - asset_ingestion
+          - multimodal_analysis
+          - distinctive_asset_recognition
+          - brand_consistency_check
+          - performance_prediction
+          - optimization_recommendations
+        
+      campaign_effectiveness:
+        steps:
+          - objective_alignment
+          - baseline_establishment
+          - performance_tracking
+          - incrementality_measurement
+          - roi_attribution
+          - long_term_impact_modeling
+        
+      global_standardization:
+        steps:
+          - market_normalization
+          - cultural_adaptation_scoring
+          - cross_market_benchmarking
+          - unified_reporting
+    
+    monitoring:
+      metrics:
+        - prediction_accuracy
+        - analysis_speed
+        - optimization_impact
+        - client_satisfaction
+        - award_win_rate
+      
+      alerts:
+        - prediction_deviation_threshold: 0.15
+        - analysis_timeout: 900
+        - error_rate_threshold: 0.01
+      
+      dashboards:
+        - executive_summary
+        - creative_performance
+        - campaign_effectiveness
+        - competitive_intelligence
+        - award_tracking
+
+deployment:
+  infrastructure:
+    kubernetes:
+      namespace: jampacked-creative
+      replicas:
+        min: 3
+        max: 50
+      resources:
+        requests:
+          cpu: "2000m"
+          memory: "8Gi"
+        limits:
+          cpu: "4000m"
+          memory: "16Gi"
+      gpu:
+        enabled: true
+        type: nvidia-tesla-t4
+        count: 1
+    
+    scaling:
+      type: horizontal_pod_autoscaler
+      metrics:
+        - cpu_utilization: 70
+        - memory_utilization: 80
+        - request_rate: 100
+      behavior:
+        scale_up:
+          stabilization: 60
+          policies:
+            - type: Percent
+              value: 100
+              period: 60
+        scale_down:
+          stabilization: 300
+          policies:
+            - type: Percent
+              value: 50
+              period: 300
+    
+    persistence:
+      volumes:
+        - name: creative-assets
+          size: 5Ti
+          type: ssd
+        - name: campaign-data
+          size: 2Ti
+          type: ssd
+        - name: model-cache
+          size: 500Gi
+          type: ssd
+
+security:
+  authentication:
+    type: oauth2
+    provider: ${AUTH_PROVIDER}
+    scopes:
+      - creative:read
+      - creative:write
+      - campaign:analyze
+      - reports:generate
+  
+  encryption:
+    at_rest: aes-256-gcm
+    in_transit: tls-1.3
+    key_management: aws_kms
+  
+  compliance:
+    - gdpr
+    - ccpa
+    - sox
+    - iso27001
+
+integrations:
+  client_platforms:
+    tbwa_smp:
+      clients:
+        - dito_telecom
+        - mcdonalds_philippines
+      custom_features:
+        - philippine_cultural_analysis
+        - local_award_tracking
+        - client_brand_guidelines
+    
+  external_apis:
+    - facebook_marketing_api
+    - google_ads_api
+    - tiktok_marketing_api
+    - linkedin_marketing_api
+    - warc_database_api
+    - mintel_insights_api
+    - nielsen_data_api
+  
+  reporting:
+    formats:
+      - interactive_dashboards
+      - pdf_reports
+      - pptx_presentations
+      - api_endpoints
+    
+    schedules:
+      - daily_performance
+      - weekly_optimization
+      - monthly_effectiveness
+      - quarterly_brand_health
+      - annual_award_submission
