@@ -1,0 +1,44 @@
+{
+  "mcp_extensions": {
+    "sqlite": {
+      "enabled": true,
+      "auto_start": true,
+      "config": {
+        "DB_PATH": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite",
+        "CONFIG_PATH": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/config/server-config-local.json"
+      }
+    }
+  },
+  
+  "jampacked_integration": {
+    "enabled": true,
+    "google_drive": {
+      "folder_id": "0AJMhu01UUQKoUk9PVA",
+      "auto_sync": true,
+      "sync_interval": "weekly"
+    },
+    "task_processing": {
+      "auto_claim": true,
+      "agent_name": "Claude Desktop",
+      "capabilities": ["sql_queries", "data_visualization", "google_drive_extraction"]
+    }
+  },
+  
+  "sql_shortcuts": {
+    "jampacked_status": "SELECT * FROM task_statistics;",
+    "pending_tasks": "SELECT * FROM active_tasks WHERE target_agent = 'Claude Desktop';",
+    "recent_analyses": "SELECT * FROM jampacked_analyses ORDER BY created_at DESC LIMIT 10;",
+    "award_summary": "SELECT award_show, COUNT(*) as count FROM campaign_awards GROUP BY award_show;"
+  },
+  
+  "memory_context": {
+    "project_path": "/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence",
+    "mcp_server_path": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server",
+    "primary_tables": [
+      "agent_task_queue",
+      "jampacked_analyses", 
+      "campaign_awards",
+      "csr_assessments"
+    ]
+  }
+}

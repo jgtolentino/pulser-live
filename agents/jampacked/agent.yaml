@@ -1,0 +1,57 @@
+name: JamPacked
+version: "2.0.0"
+description: >
+  JamPacked Creative Intelligence - Enhanced with PySpark optimization capabilities
+author: TBWA
+created: "2025-01-10"
+updated: "2025-01-10"
+
+capabilities:
+  - creative_intelligence
+  - data_processing
+  - spark_optimization
+  - udf_creation
+  - plan_analysis
+
+includes:
+  - agents/jampacked/optimizers/udf_agent.yaml
+  - agents/jampacked/optimizers/plan_optimizer.yaml
+
+dependencies:
+  - pyspark>=3.0.0
+  - pandas>=1.3.0
+  - numpy>=1.21.0
+
+configuration:
+  spark:
+    app_name: "JamPacked-Creative-Intelligence"
+    master: "local[*]"
+    config:
+      spark.sql.adaptive.enabled: "true"
+      spark.sql.adaptive.coalescePartitions.enabled: "true"
+      spark.sql.adaptive.skewJoin.enabled: "true"
+      spark.sql.autoBroadcastJoinThreshold: "10MB"
+      spark.sql.shuffle.partitions: "200"
+
+commands:
+  notebook:
+    description: "Launch PySpark training notebook"
+    command: "jupyter notebook notebooks/pyspark_roadmap.ipynb"
+  
+  udf:
+    description: "UDF creation and benchmarking"
+    command: "python optimizers/create_udf_agent.py"
+  
+  optimize:
+    description: "Analyze and optimize Spark execution plans"
+    command: "python optimizers/plan_optimizer.py"
+
+integrations:
+  - type: jupyter
+    notebooks:
+      - notebooks/pyspark_roadmap.ipynb
+  
+  - type: cli
+    scripts:
+      - optimizers/create_udf_agent.py
+      - optimizers/plan_optimizer.py

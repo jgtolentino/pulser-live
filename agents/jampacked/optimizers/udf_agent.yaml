@@ -1,0 +1,9 @@
+name: SparkUDFHelper
+description: >
+  Assists in creating, registering, and benchmarking PySpark UDFs.
+entrypoint: udf/create_udf_agent.py
+tasks:
+  - create_basic_udf
+  - create_vectorized_udf
+  - benchmark_udf
+  - register_udf_to_spark

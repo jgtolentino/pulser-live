@@ -1,0 +1,9 @@
+name: PlanOptimizer
+description: >
+  Analyzes `.explain()` plans, visualizes shuffle stages, and annotates join strategies.
+entrypoint: optimizers/plan_optimizer.py
+tasks:
+  - parse_explain_plan
+  - visualize_dag
+  - detect_skew
+  - recommend_broadcast_joins

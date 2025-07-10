@@ -1,0 +1,112 @@
+# MCP Configuration for JamPacked Creative Intelligence
+# This file ensures Claude Code remembers the setup
+
+mcp:
+  enabled: true
+  server: sqlite
+  db_path: /Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite
+  config_path: /Users/tbwa/Documents/GitHub/mcp-sqlite-server/config/server-config-local.json
+
+# Task delegation configuration for Claude Desktop
+task_delegation:
+  exec: bruno
+  orchestrate: pulser_cli
+  analysis: jampacked
+  extraction: claude_desktop_drive_extractor
+
+agents:
+  - name: ClaudeDesktop
+    type: coordinator
+    agent_name: claude_desktop
+    capabilities:
+      - task_delegation
+      - non_executing
+      - sql_queries
+    
+  - name: Bruno
+    type: executor
+    agent_name: bruno
+    path: ./agents/bruno/bruno-agent.yaml
+    capabilities:
+      - shell_root
+      - docker_ops
+      - privileged_exec
+      
+  - name: PulserCLI
+    type: orchestrator
+    agent_name: pulser_cli
+    path: ./persistence/pulser-task-runner.sh
+    capabilities:
+      - orchestration
+      - etl_pipelines
+      - agent_coordination
+    
+  - name: JamPacked
+    type: analyzer
+    agent_name: jampacked
+    path: ./mcp-integration/analyze-with-jampacked-handler.js
+    capabilities:
+      - creative_analysis
+      - award_prediction
+      - csr_scoring
+    
+  - name: ClaudeDesktopDriveExtractor
+    type: extractor
+    agent_name: claude_desktop_drive_extractor
+    path: ./mcp-integration/claude-desktop-drive-extractor.js
+    capabilities:
+      - google_drive_extraction
+      - awards_data_processing
+
+  - name: AgentRelay
+    type: dispatcher
+    agent_name: agent_relay
+    path: ./mcp-integration/agent_relay.py
+    capabilities:
+      - task_routing
+      - queue_management
+
+services:
+  api_server:
+    port: 3001
+    path: ./api/jampacked-api-server.js
+    
+  websocket_server:
+    port: 8765
+    path: ./mcp-integration/realtime-notifications.js
+    
+  performance_monitor:
+    path: ./mcp-integration/performance-monitoring.js
+
+# Task queue configuration
+task_queue:
+  table: agent_task_queue
+  priority_levels: 10
+  max_retries: 3
+  
+# Results storage
+results:
+  analyses_table: jampacked_analyses
+  scores_table: jampacked_scores
+  awards_table: campaign_awards
+  csr_table: csr_assessments
+  
+# Google Drive settings
+google_drive:
+  folder_id: 0AJMhu01UUQKoUk9PVA
+  extraction_method: claude_desktop
+  
+# Monitoring
+monitoring:
+  retention_days: 30
+  alert_thresholds:
+    cpu_usage: 80
+    memory_usage: 85
+    response_time: 5000
+    error_rate: 5
+    
+# Versioning
+versioning:
+  enabled: true
+  track_lineage: true
+  reproducibility_snapshots: true

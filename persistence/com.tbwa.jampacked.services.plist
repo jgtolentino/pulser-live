@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.tbwa.jampacked.services</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence/persistence/start_services.sh</string>
+    </array>
+    
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>NODE_ENV</key>
+        <string>production</string>
+        <key>JAMPACKED_HOME</key>
+        <string>/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence</string>
+    </dict>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence</string>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/tbwa/Library/Logs/jampacked-services.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/tbwa/Library/Logs/jampacked-services.error.log</string>
+    
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <key>KeepAlive</key>
+    <true/>
+    
+    <key>StartInterval</key>
+    <integer>300</integer>
+</dict>
+</plist>

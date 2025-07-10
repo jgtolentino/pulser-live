@@ -1,0 +1,18 @@
+{
+  "name": "agent-monitoring-server",
+  "version": "1.0.0",
+  "description": "Real-time monitoring for Lions Palette Forge agents",
+  "main": "agent-status-server.js",
+  "scripts": {
+    "start": "node agent-status-server.js",
+    "dev": "nodemon agent-status-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

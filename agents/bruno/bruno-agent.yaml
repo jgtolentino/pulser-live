@@ -1,0 +1,21 @@
+# :bruno-agent.yaml
+name: Bruno
+codename: bruno
+description: >
+  Secure executor for privileged shell tasks (e.g., Docker, root ops).
+  Delegated by Claude Desktop via agent_task_queue.
+permissions:
+  - shell:root
+  - file:read
+  - file:write
+  - exec:sudo
+task_queue:
+  listen_for: exec
+  storage: sqlite
+  db_path: ~/Documents/GitHub/mcp-sqlite-server/data/database.sqlite
+  polling_interval: 3s
+execution:
+  script: ./agents/bruno/run_exec.sh
+memory_tags:
+  - executor
+  - root
