@@ -32,7 +32,8 @@ SELECT result FROM agent_task_queue WHERE task_id = 'yt_jampacked_001';
 
 ## Testing
 ```bash
-./test_youtube_integration.sh
+# Run integration tests
+python -m pytest tests/test_youtube_integration.py
 ```
 
 ## Logs
