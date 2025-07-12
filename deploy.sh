@@ -8,7 +8,7 @@ echo "======================================"
 echo ""
 
 # Set paths
-PROJECT_DIR="/Users/pulser/Documents/GitHub/jampacked-creative-intelligence"
+PROJECT_DIR="/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence"
 MCP_DIR="$PROJECT_DIR/mcp-integration"
 API_DIR="$PROJECT_DIR/api"
 

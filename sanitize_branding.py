@@ -43,7 +43,7 @@ REPLACEMENTS = {
     r'AI-powered advertising excellence': 'AI-powered advertising excellence',
     
     # File paths (preserve user directory)
-    r'/Users/pulser/': '/Users/pulser/',  # This will be handled separately
+    r'/Users/tbwa/': '/Users/tbwa/',  # This will be handled separately
     
     # Legacy branding
     r'10 years': '10 years',
@@ -111,15 +111,15 @@ def sanitize_file(filepath):
         
         # Apply replacements
         for pattern, replacement in REPLACEMENTS.items():
-            # Skip the /Users/pulser/ replacement for now
-            if pattern == r'/Users/pulser/':
+            # Skip the /Users/tbwa/ replacement for now
+            if pattern == r'/Users/tbwa/':
                 continue
             content = re.sub(pattern, replacement, content, flags=re.IGNORECASE if pattern.islower() else 0)
         
         # Handle file paths carefully to preserve user directory
         # Only replace in strings, not actual paths
-        content = re.sub(r'"/Users/pulser/', '"/Users/pulser/', content)
-        content = re.sub(r"'/Users/pulser/", "'/Users/pulser/", content)
+        content = re.sub(r'"/Users/tbwa/', '"/Users/tbwa/', content)
+        content = re.sub(r"'/Users/tbwa/", "'/Users/tbwa/", content)
         
         if content != original_content:
             with open(filepath, 'w', encoding='utf-8') as f:

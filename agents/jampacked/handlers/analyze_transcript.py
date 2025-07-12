@@ -11,7 +11,7 @@ class YouTubeTranscriptAnalyzer:
     Integrates with existing WARC Effectiveness framework
     """
     
-    def __init__(self, db_path="/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
+    def __init__(self, db_path="/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
         self.db_path = db_path
         self.logger = logging.getLogger(__name__)
         
@@ -258,7 +258,7 @@ def run_task_runner():
     Polls SQLite queue for transcript analysis tasks
     Integrates with your existing task queue system
     """
-    db_path = "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
+    db_path = "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
     analyzer = YouTubeTranscriptAnalyzer(db_path)
     
     conn = sqlite3.connect(db_path)

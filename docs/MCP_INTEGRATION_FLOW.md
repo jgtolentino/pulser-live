@@ -198,12 +198,12 @@ graph TB
 
 ### 1. **Database Location**
 ```
-/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite
+/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite
 ```
 
 ### 2. **MCP Server**
 ```
-/Users/pulser/Documents/GitHub/mcp-sqlite-server/dist/index.js
+/Users/tbwa/Documents/GitHub/mcp-sqlite-server/dist/index.js
 ```
 
 ### 3. **JamPacked Integration**

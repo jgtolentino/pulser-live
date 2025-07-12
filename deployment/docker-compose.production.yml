@@ -130,7 +130,7 @@ services:
       - SQLITE_DB_PATH=/data/mcp/database.sqlite
     volumes:
       - mcp-data:/data/mcp
-      - ${MCP_SERVER_PATH:-/Users/pulser/Documents/GitHub/mcp-sqlite-server}:/mcp-sqlite-server:ro
+      - ${MCP_SERVER_PATH:-/Users/tbwa/Documents/GitHub/mcp-sqlite-server}:/mcp-sqlite-server:ro
     ports:
       - "3333:3333"  # MCP server port
     healthcheck:

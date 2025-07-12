@@ -3,14 +3,14 @@
 ## 🔗 Seamless Integration with Model Context Protocol
 
 CES JamPacked Agentic integrates directly with your existing MCP SQLite server for AI-powered advertising optimization:
-- **Database Path**: `/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite`
-- **MCP Server**: `/Users/pulser/Documents/GitHub/mcp-sqlite-server/dist/index.js`
+- **Database Path**: `/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite`
+- **MCP Server**: `/Users/tbwa/Documents/GitHub/mcp-sqlite-server/dist/index.js`
 
 ## 🚀 Quick Setup
 
 1. **Initialize JamPacked tables in your existing MCP database**:
 ```bash
-cd /Users/pulser/Documents/GitHub/jampacked-creative-intelligence
+cd /Users/tbwa/Documents/GitHub/jampacked-creative-intelligence
 python setup_mcp_integration.py
 ```
 

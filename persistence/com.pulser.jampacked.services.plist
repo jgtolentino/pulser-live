@@ -8,7 +8,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>/Users/pulser/Documents/GitHub/jampacked-creative-intelligence/persistence/start_services.sh</string>
+        <string>/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence/persistence/start_services.sh</string>
     </array>
     
     <key>EnvironmentVariables</key>
@@ -16,17 +16,17 @@
         <key>NODE_ENV</key>
         <string>production</string>
         <key>JAMPACKED_HOME</key>
-        <string>/Users/pulser/Documents/GitHub/jampacked-creative-intelligence</string>
+        <string>/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence</string>
     </dict>
     
     <key>WorkingDirectory</key>
-    <string>/Users/pulser/Documents/GitHub/jampacked-creative-intelligence</string>
+    <string>/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence</string>
     
     <key>StandardOutPath</key>
-    <string>/Users/pulser/Library/Logs/jampacked-services.log</string>
+    <string>/Users/tbwa/Library/Logs/jampacked-services.log</string>
     
     <key>StandardErrorPath</key>
-    <string>/Users/pulser/Library/Logs/jampacked-services.error.log</string>
+    <string>/Users/tbwa/Library/Logs/jampacked-services.error.log</string>
     
     <key>RunAtLoad</key>
     <true/>

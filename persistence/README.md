@@ -17,7 +17,7 @@ This bundle ensures Claude Desktop and Claude Code permanently remember your MCP
 ## 🚀 Quick Install
 
 ```bash
-cd /Users/pulser/Documents/GitHub/jampacked-creative-intelligence/persistence
+cd /Users/tbwa/Documents/GitHub/jampacked-creative-intelligence/persistence
 chmod +x install-persistence.sh
 ./install-persistence.sh
 ```

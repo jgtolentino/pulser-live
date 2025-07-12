@@ -10,7 +10,7 @@ const fs = require('fs').promises;
  */
 class AwardsDataExtractor {
   constructor(dbPath) {
-    this.dbPath = dbPath || '/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite';
+    this.dbPath = dbPath || '/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite';
     this.claudeExtractor = new ClaudeDesktopDriveExtractor(dbPath);
     this.db = null;
     this.processedFiles = new Set();

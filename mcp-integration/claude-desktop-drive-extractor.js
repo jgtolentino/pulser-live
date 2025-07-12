@@ -7,7 +7,7 @@ const sqlite3 = require('sqlite3').verbose();
  */
 class ClaudeDesktopDriveExtractor {
   constructor(dbPath) {
-    this.dbPath = dbPath || '/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite';
+    this.dbPath = dbPath || '/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite';
     this.db = null;
     this.Pulser_AWARDS_FOLDER_ID = '0AJMhu01UUQKoUk9PVA';
   }

@@ -12,7 +12,7 @@ class RealtimeNotificationSystem extends EventEmitter {
     super();
     this.config = {
       wsPort: config.wsPort || 8765,
-      dbPath: config.dbPath || '/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite',
+      dbPath: config.dbPath || '/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite',
       heartbeatInterval: config.heartbeatInterval || 30000,
       reconnectDelay: config.reconnectDelay || 5000
     };

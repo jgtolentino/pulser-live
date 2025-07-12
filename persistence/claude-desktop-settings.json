@@ -4,8 +4,8 @@
       "enabled": true,
       "auto_start": true,
       "config": {
-        "DB_PATH": "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite",
-        "CONFIG_PATH": "/Users/pulser/Documents/GitHub/mcp-sqlite-server/config/server-config-local.json"
+        "DB_PATH": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite",
+        "CONFIG_PATH": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/config/server-config-local.json"
       }
     }
   },
@@ -32,8 +32,8 @@
   },
   
   "memory_context": {
-    "project_path": "/Users/pulser/Documents/GitHub/jampacked-creative-intelligence",
-    "mcp_server_path": "/Users/pulser/Documents/GitHub/mcp-sqlite-server",
+    "project_path": "/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence",
+    "mcp_server_path": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server",
     "primary_tables": [
       "agent_task_queue",
       "jampacked_analyses", 

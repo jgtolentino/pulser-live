@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
  */
 class CSRAuthenticityScorer {
   constructor(dbPath) {
-    this.dbPath = dbPath || '/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite';
+    this.dbPath = dbPath || '/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite';
     this.db = null;
     this.authenticityFactors = {
       brand_heritage: new BrandHeritageAnalyzer(),

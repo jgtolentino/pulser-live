@@ -8,27 +8,27 @@
     <key>ProgramArguments</key>
     <array>
         <string>/usr/local/bin/node</string>
-        <string>/Users/pulser/Documents/GitHub/mcp-sqlite-server/dist/index.js</string>
+        <string>/Users/tbwa/Documents/GitHub/mcp-sqlite-server/dist/index.js</string>
     </array>
     
     <key>EnvironmentVariables</key>
     <dict>
         <key>DB_PATH</key>
-        <string>/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite</string>
+        <string>/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite</string>
         <key>CONFIG_PATH</key>
-        <string>/Users/pulser/Documents/GitHub/mcp-sqlite-server/config/server-config-local.json</string>
+        <string>/Users/tbwa/Documents/GitHub/mcp-sqlite-server/config/server-config-local.json</string>
         <key>NODE_ENV</key>
         <string>production</string>
     </dict>
     
     <key>WorkingDirectory</key>
-    <string>/Users/pulser/Documents/GitHub/mcp-sqlite-server</string>
+    <string>/Users/tbwa/Documents/GitHub/mcp-sqlite-server</string>
     
     <key>StandardOutPath</key>
-    <string>/Users/pulser/Library/Logs/mcp-sqlite-server.log</string>
+    <string>/Users/tbwa/Library/Logs/mcp-sqlite-server.log</string>
     
     <key>StandardErrorPath</key>
-    <string>/Users/pulser/Library/Logs/mcp-sqlite-server.error.log</string>
+    <string>/Users/tbwa/Library/Logs/mcp-sqlite-server.error.log</string>
     
     <key>RunAtLoad</key>
     <true/>

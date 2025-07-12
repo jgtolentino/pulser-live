@@ -41,7 +41,7 @@ def check_database():
     """Check database connectivity and schema"""
     print("\n🗄️  Checking database...")
     
-    db_path = "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
+    db_path = "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
     
     try:
         conn = sqlite3.connect(db_path)
@@ -107,7 +107,7 @@ def create_test_task():
     """Create a test task in the database"""
     print("\n📝 Creating test task...")
     
-    db_path = "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
+    db_path = "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
     
     try:
         conn = sqlite3.connect(db_path)
@@ -161,7 +161,7 @@ def main():
     task_id = create_test_task()
     if task_id:
         print(f"\n🧪 Test task created: {task_id}")
-        print("📋 To monitor: sqlite3 /Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite \"SELECT * FROM agent_task_queue WHERE task_id = '{}';\"".format(task_id))
+        print("📋 To monitor: sqlite3 /Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite \"SELECT * FROM agent_task_queue WHERE task_id = '{}';\"".format(task_id))
     
     print("\n🎉 Verification complete!")
 

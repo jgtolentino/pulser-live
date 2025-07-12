@@ -23,7 +23,7 @@ All TBWA and Disruption branding has been successfully removed and replaced with
 - `com.tbwa.jampacked.services.plist` → `com.pulser.jampacked.services.plist`
 
 ### 4. Path Updates
-- `/Users/tbwa/` → `/Users/pulser/` (in configuration files)
+- `/Users/tbwa/` → `/Users/tbwa/` (in configuration files)
 - All service configurations updated
 - Database paths updated
 

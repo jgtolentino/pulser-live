@@ -24,7 +24,7 @@ def setup_jampacked_mcp_integration():
     print("=" * 50)
     
     # Configuration
-    mcp_db_path = "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
+    mcp_db_path = "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
     
     print(f"\n📍 MCP SQLite Database: {mcp_db_path}")
     
@@ -189,7 +189,7 @@ def verify_integration():
     """
     import sqlite3
     
-    db_path = "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
+    db_path = "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
     
