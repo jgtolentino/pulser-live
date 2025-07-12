@@ -7,7 +7,7 @@ echo "🛑 Stopping JamPacked MCP Integration Services"
 echo "==========================================="
 echo ""
 
-PROJECT_DIR="/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence"
+PROJECT_DIR="/Users/pulser/Documents/GitHub/jampacked-creative-intelligence"
 LOGS_DIR="${PROJECT_DIR}/logs"
 
 # Colors for output

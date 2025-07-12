@@ -11,7 +11,7 @@ class PerformanceMonitor extends EventEmitter {
   constructor(config = {}) {
     super();
     this.config = {
-      dbPath: config.dbPath || '/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite',
+      dbPath: config.dbPath || '/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite',
       samplingInterval: config.samplingInterval || 60000, // 1 minute
       alertThresholds: config.alertThresholds || {
         cpu_usage: 80,

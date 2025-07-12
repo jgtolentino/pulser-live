@@ -6,11 +6,11 @@ const fs = require('fs').promises;
 
 /**
  * Automated Awards Data Extraction from Google Drive
- * Processes TBWA awards database and updates SQLite
+ * Processes Pulser awards database and updates SQLite
  */
 class AwardsDataExtractor {
   constructor(dbPath) {
-    this.dbPath = dbPath || '/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite';
+    this.dbPath = dbPath || '/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite';
     this.claudeExtractor = new ClaudeDesktopDriveExtractor(dbPath);
     this.db = null;
     this.processedFiles = new Set();
@@ -130,7 +130,7 @@ class AwardsDataExtractor {
       
       // Create extraction task for Claude Desktop
       const taskId = await this.claudeExtractor.createExtractionTask({
-        instructions: 'Extract all award data from TBWA Google Drive folder',
+        instructions: 'Extract all award data from Pulser Google Drive folder',
         year_range: '2020-2024',
         focus_shows: ['Cannes Lions', 'D&AD', 'One Show', 'Effie', 'Clio']
       });
@@ -286,7 +286,7 @@ class AwardsDataExtractor {
         award_title: row[indices.campaign_name] || '',
         client: row[indices.client] || '',
         brand: row[indices.brand] || '',
-        agency: row[indices.agency] || 'TBWA',
+        agency: row[indices.agency] || 'Pulser',
         country: row[indices.country] || ''
       };
 

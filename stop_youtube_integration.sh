@@ -1,7 +1,7 @@
 #!/bin/bash
 # Stop YouTube integration daemons
 
-JAMPACKED_DIR="/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence"
+JAMPACKED_DIR="/Users/pulser/Documents/GitHub/jampacked-creative-intelligence"
 cd "$JAMPACKED_DIR"
 
 echo "🛑 Stopping JamPacked YouTube Integration..."

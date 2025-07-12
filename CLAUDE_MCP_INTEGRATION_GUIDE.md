@@ -41,7 +41,7 @@ JamPacked leverages your existing MCP SQLite server instead of creating a new on
 
 ```bash
 # Location of existing MCP server
-/Users/tbwa/Documents/GitHub/mcp-sqlite-server/
+/Users/pulser/Documents/GitHub/mcp-sqlite-server/
 
 # Key files:
 - dist/index.js          # MCP server implementation
@@ -55,7 +55,7 @@ JamPacked leverages your existing MCP SQLite server instead of creating a new on
 # /autonomous-intelligence/core/jampacked_sqlite_integration.py
 
 class JamPackedSQLiteIntegration:
-    def __init__(self, db_path="/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
+    def __init__(self, db_path="/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
         self.db_path = db_path
         self.jampacked = JamPackedIntelligenceSuite()
         self.init_jampacked_tables()
@@ -157,9 +157,9 @@ Claude Desktop can use MCP tools to interact with JamPacked:
 mcpServers:
   sqlite:
     command: "node"
-    args: ["/Users/tbwa/Documents/GitHub/mcp-sqlite-server/dist/index.js"]
+    args: ["/Users/pulser/Documents/GitHub/mcp-sqlite-server/dist/index.js"]
     env:
-      DATABASE_PATH: "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
+      DATABASE_PATH: "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
 ```
 
 ### 3. **Real-time Analysis Results**
@@ -357,11 +357,11 @@ print(f"CSR Score: {variables['csr_authenticity_score']}")
 
 ```bash
 # 1. Ensure MCP SQLite server is running
-cd /Users/tbwa/Documents/GitHub/mcp-sqlite-server
+cd /Users/pulser/Documents/GitHub/mcp-sqlite-server
 npm start
 
 # 2. Initialize JamPacked tables
-cd /Users/tbwa/Documents/GitHub/jampacked-creative-intelligence
+cd /Users/pulser/Documents/GitHub/jampacked-creative-intelligence
 python setup_mcp_integration.py
 
 # 3. Verify integration
@@ -376,7 +376,7 @@ Add to Claude Desktop settings:
   "mcpServers": {
     "sqlite": {
       "command": "node",
-      "args": ["/Users/tbwa/Documents/GitHub/mcp-sqlite-server/dist/index.js"]
+      "args": ["/Users/pulser/Documents/GitHub/mcp-sqlite-server/dist/index.js"]
     }
   }
 }

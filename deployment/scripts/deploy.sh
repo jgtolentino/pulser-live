@@ -51,7 +51,7 @@ check_prerequisites() {
     fi
     
     # Check if MCP SQLite server exists
-    MCP_SERVER_PATH="${MCP_SERVER_PATH:-/Users/tbwa/Documents/GitHub/mcp-sqlite-server}"
+    MCP_SERVER_PATH="${MCP_SERVER_PATH:-/Users/pulser/Documents/GitHub/mcp-sqlite-server}"
     if [ ! -d "$MCP_SERVER_PATH" ]; then
         echo -e "${YELLOW}⚠ MCP SQLite server not found at $MCP_SERVER_PATH${NC}"
         echo "  Set MCP_SERVER_PATH environment variable if it's in a different location"
@@ -100,7 +100,7 @@ deploy_docker_compose() {
     mkdir -p "$PROJECT_ROOT/data/jampacked" "$PROJECT_ROOT/data/mcp" "$PROJECT_ROOT/logs"
     
     # Set environment variables
-    export MCP_SERVER_PATH="${MCP_SERVER_PATH:-/Users/tbwa/Documents/GitHub/mcp-sqlite-server}"
+    export MCP_SERVER_PATH="${MCP_SERVER_PATH:-/Users/pulser/Documents/GitHub/mcp-sqlite-server}"
     export GPU_ENABLED="${GPU_ENABLED:-false}"
     export GRAFANA_PASSWORD="${GRAFANA_PASSWORD:-admin}"
     
@@ -183,7 +183,7 @@ initialize_database() {
     if [ "$DEPLOYMENT_TYPE" = "docker" ]; then
         docker run --rm \
             -v "$PROJECT_ROOT:/app" \
-            -v "${MCP_SERVER_PATH:-/Users/tbwa/Documents/GitHub/mcp-sqlite-server}/data:/data/mcp" \
+            -v "${MCP_SERVER_PATH:-/Users/pulser/Documents/GitHub/mcp-sqlite-server}/data:/data/mcp" \
             --network deployment_jampacked-network \
             jampacked/core:latest \
             python /app/setup_mcp_integration.py

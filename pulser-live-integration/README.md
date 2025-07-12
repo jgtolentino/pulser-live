@@ -1,6 +1,6 @@
 # Pulser Live AI Integration
 
-This directory contains the integration code to transform Pulser Live into an AI-powered advertising optimization platform.
+This directory contains the integration code to transform Pulser Live into an AI-powered advertising optimization platform as part of the CES JamPacked Agentic system.
 
 ## Overview
 

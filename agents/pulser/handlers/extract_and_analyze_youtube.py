@@ -15,7 +15,7 @@ class PulserYouTubeHandler:
     Downloads video, extracts audio, transcribes with Whisper
     """
     
-    def __init__(self, db_path="/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
+    def __init__(self, db_path="/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
         self.db_path = db_path
         self.logger = logging.getLogger(__name__)
         self.temp_dir = tempfile.mkdtemp()
@@ -228,7 +228,7 @@ def run_pulser_task_runner():
     Task runner for Pulser YouTube processing
     Polls the task queue for YouTube analysis requests
     """
-    db_path = "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
+    db_path = "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
     handler = PulserYouTubeHandler(db_path)
     
     conn = sqlite3.connect(db_path)

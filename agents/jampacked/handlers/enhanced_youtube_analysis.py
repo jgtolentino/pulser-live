@@ -1,7 +1,7 @@
 # agents/jampacked/handlers/enhanced_youtube_analysis.py
 """
 Enhanced YouTube Analysis with Google Drive Campaign Intelligence
-Combines video analysis with campaign context from TBWA Drive folder
+Combines video analysis with campaign context from Pulser Drive folder
 """
 
 import sqlite3
@@ -17,7 +17,7 @@ class EnhancedYouTubeAnalyzer:
     Provides campaign context and historical intelligence for better predictions
     """
     
-    def __init__(self, db_path="/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
+    def __init__(self, db_path="/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
         self.db_path = db_path
         self.logger = logging.getLogger(__name__)
         self.DRIVE_CAMPAIGN_ROOT_ID = "0AJMhu01UUQKoUk9PVA"
@@ -441,7 +441,7 @@ def run_enhanced_task_runner():
     """
     Enhanced task runner that handles both YouTube analysis and Drive integration
     """
-    db_path = "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
+    db_path = "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"
     analyzer = EnhancedYouTubeAnalyzer(db_path)
     
     conn = sqlite3.connect(db_path)

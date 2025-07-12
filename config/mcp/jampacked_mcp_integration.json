@@ -1,9 +1,9 @@
 {
   "mcp_integration": {
     "existing_sqlite_server": {
-      "path": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/dist/index.js",
-      "db_path": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite",
-      "config_path": "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/config/server-config-local.json",
+      "path": "/Users/pulser/Documents/GitHub/mcp-sqlite-server/dist/index.js",
+      "db_path": "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite",
+      "config_path": "/Users/pulser/Documents/GitHub/mcp-sqlite-server/config/server-config-local.json",
       "description": "Leverage existing SQLite MCP server for JamPacked data storage"
     },
     

@@ -280,29 +280,29 @@ Time sensitivity: {urgency_level}
             ),
             
             CompetitiveIntelligencePrompt(
-                name="market_disruption_analysis",
+                name="market_innovation_analysis",
                 intelligence_type=IntelligenceType.CRISIS_RESPONSE,
                 analysis_depth=AnalysisDepth.COMPREHENSIVE,
                 prompt_template="""
-Analyze market disruption potential from {disruptor} in {market_segment}.
+Analyze market innovation potential from {innovateor} in {market_segment}.
 
 Assess:
-1. Disruption timeline and phases
+1. Innovation timeline and phases
 2. Customer segments most at risk
 3. Our competitive advantages that remain relevant
 4. Required strategic pivots
 5. Partnership or acquisition opportunities
 6. Defensive positioning strategies
 
-Disruption type: {disruption_type}
+Innovation type: {innovation_type}
 Our current position: {market_position}
 """,
-                required_inputs=["disruptor", "market_segment", "disruption_type", "market_position"],
+                required_inputs=["innovateor", "market_segment", "innovation_type", "market_position"],
                 ethical_constraints=[
                     "Focus on market dynamics, not undermining competitors",
                     "Propose ethical competitive responses only"
                 ],
-                output_format="Disruption response playbook with scenario planning"
+                output_format="Innovation response playbook with scenario planning"
             )
         ]
     

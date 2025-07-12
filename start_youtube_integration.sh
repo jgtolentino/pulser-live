@@ -1,13 +1,13 @@
 #!/bin/bash
 # Start YouTube integration daemons
 
-JAMPACKED_DIR="/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence"
+JAMPACKED_DIR="/Users/pulser/Documents/GitHub/jampacked-creative-intelligence"
 cd "$JAMPACKED_DIR"
 
 echo "🎬 Starting JamPacked YouTube Integration..."
 
 # Add Python user bin to PATH
-export PATH="/Users/tbwa/Library/Python/3.9/bin:$PATH"
+export PATH="/Users/pulser/Library/Python/3.9/bin:$PATH"
 
 # Load environment
 source .env.youtube

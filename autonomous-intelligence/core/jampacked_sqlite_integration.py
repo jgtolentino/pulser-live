@@ -20,7 +20,7 @@ class JamPackedSQLiteIntegration:
     Integrates JamPacked with existing SQLite MCP server
     """
     
-    def __init__(self, db_path: str = "/Users/tbwa/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
+    def __init__(self, db_path: str = "/Users/pulser/Documents/GitHub/mcp-sqlite-server/data/database.sqlite"):
         self.db_path = db_path
         self.jampacked = JamPackedIntelligenceSuite()
         

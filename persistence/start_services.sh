@@ -3,7 +3,7 @@
 # JamPacked Services Startup Script
 # Ensures all services are running
 
-JAMPACKED_HOME="${JAMPACKED_HOME:-/Users/tbwa/Documents/GitHub/jampacked-creative-intelligence}"
+JAMPACKED_HOME="${JAMPACKED_HOME:-/Users/pulser/Documents/GitHub/jampacked-creative-intelligence}"
 LOG_DIR="$HOME/Library/Logs"
 
 # Function to check if process is running
